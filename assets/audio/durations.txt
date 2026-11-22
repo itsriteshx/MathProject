@@ -1,0 +1,7 @@
+scene1_hook:39.984
+scene2_intro:44.520
+scene3_visual:80.400
+scene4_math:100.704
+scene5_eigenbasis:58.152
+scene6_summary:36.480
+total:360.240
