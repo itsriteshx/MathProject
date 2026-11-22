@@ -1,0 +1,8 @@
+# Requirements for M3 Animation Video Project
+# Student: Ritesh Kumar | URN: e25b070681
+numpy>=2.0.0
+scipy>=1.14.0
+matplotlib>=3.9.0
+pillow>=10.4.0
+reportlab>=4.2.0
+edge-tts>=6.1.0

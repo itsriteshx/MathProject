@@ -1,0 +1,12 @@
+# Git Ignore
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+assets/rendered_scenes/
+assets/test_frames/
+/tmp/
+
+# Protected Local Deliverables (Excluded from public GitHub until final submission day)
+_Video.mp4
+VIVA_PREP_GUIDE.md
