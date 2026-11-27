@@ -16,8 +16,8 @@
 * **University Roll / URN:** `e25b070681`
 * **Course:** Linear Algebra and Calculus (M3)
 * **Topic:** **Eigenvalues and Eigenvectors: The Invariant Directions of Linear Space**
-* **Repository Name:** `M3_AnimationVideo_Eigenvalues_e25b070681`
-* **Final Rendered Video:** `_Video.mp4` (Duration: 5m 34s, 1080p Full HD, Embedded Subtitles, Original Hinglish Voiceover by Ritesh Kumar) *(Generated and verified locally via Python pipeline)*
+* **Repository:** [`itsriteshx/MathProject`](https://github.com/itsriteshx/MathProject)
+* **Final Rendered Video:** `_Video.mp4` (Duration: 5m 34s, 1080p Full HD, Embedded Subtitles, Original Hinglish Voiceover by Ritesh Kumar) *(Verified locally & committed)*
 * **Official Visual Storyboard:** [`Storyboard.pdf`](./Storyboard.pdf) (With High-Res Scene Snapshots)
 * **Interactive Simulator:** [`index.html`](./index.html) (Live Web Simulator, GitHub Pages Ready)
 * **Closed Captions File:** [`subtitles.srt`](./subtitles.srt)
@@ -32,9 +32,9 @@
 ## 🌐 Interactive Web Simulator (`index.html`)
 To provide full original interactive value, this repository includes a standalone **HTML5 Canvas Simulator** [`index.html`](./index.html):
 * **Live 2D Cartesian Transformation Plane:** Real-time matrix deformation with smooth interpolation slider $t \in [0, 1]$.
-* **Interactive Draggable Vector:** Drag any test vector $\vec{x}$ across the plane; a live HUD computes $\Delta \theta$ and triggers an **"✨ EIGENVECTOR ALIGNED"** glowing banner when $\Delta \theta \approx 0^\circ$.
+* **Interactive Draggable Vector (Mouse & Touch):** Drag any test vector $\vec{x}$ across the plane; a live HUD computes $\Delta \theta$, supports negative-eigenvalue flips ($\Delta\theta = 180^\circ$) and zero-vector guards, and triggers **"✨ EIGENVECTOR ALIGNED"** when aligned.
 * **3Blue1Brown Circle-to-Ellipse Visualizer:** Toggle unit circle morphing into an ellipse with principal axes aligned along eigenvectors.
-* **Quick Snap Buttons:** Instant alignment with $\vec{v}_1 = [1, 1]^T$ and $\vec{v}_2 = [-1, 1]^T$.
+* **Dynamic Eigenpair Solver & Snap Buttons:** Computes and plots true real/defective/complex eigenpairs for any $2 \times 2$ matrix with dynamic snap buttons for $\vec{v}_1$ and $\vec{v}_2$.
 * **Eigen-Analysis HUD:** Real-time characteristic equation, eigenvalues, and eigenpair cards.
 
 ---
@@ -107,6 +107,9 @@ python3 _Code/render_video.py
 
 # 6. Generate official visual storyboard PDF with snapshots
 python3 _Code/generate_storyboard.py
+
+# 7. Run independent mathematical verification suite
+python3 _Code/verify_math.py
 ```
 
 ---
