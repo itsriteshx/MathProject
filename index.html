@@ -352,8 +352,8 @@
           <input type="range" id="tSlider" min="0" max="1" step="0.01" value="1">
         </div>
         <div class="btn-group">
-          <button class="btn btn-cyan" onclick="snapVector(1, 1)">Snap to v₁ [1, 1]ᵀ</button>
-          <button class="btn btn-gold" onclick="snapVector(-1, 1)">Snap to v₂ [-1, 1]ᵀ</button>
+          <button class="btn btn-cyan" id="snapBtn1" onclick="snapToEigen(0)">Snap to v₁ [1, 1]ᵀ</button>
+          <button class="btn btn-gold" id="snapBtn2" onclick="snapToEigen(1)">Snap to v₂ [-1, 1]ᵀ</button>
         </div>
         <button class="btn" id="animBtn" style="width: 100%; margin-top: 8px;" onclick="toggleAnimation()">▶ Play Morph Animation</button>
       </div>
@@ -367,7 +367,7 @@
         </label>
         <label class="checkbox-row">
           <input type="checkbox" id="showEigenLines" checked>
-          <span>Invariant Span Lines (y = x & y = -x)</span>
+          <span>Invariant Span Lines (Eigen-Axes)</span>
         </label>
         <label class="checkbox-row">
           <input type="checkbox" id="showEigenvectors" checked>
@@ -408,6 +408,7 @@
     let tProgress = 1.0;
     let isAnimating = false;
     let animDir = 1;
+    let eigenState = { isReal: true, pairs: [] };
 
     // Interactive vector x
     let vecX = 1.0;
@@ -443,19 +444,55 @@
       ];
     }
 
-    // Mathematical Eigenvalues of 2x2
+    // Solve a representative eigenvector scaled cleanly by max(|vx|, |vy|) = 1
+    function solveEigenvector(a, b, c, d, lam) {
+      const r1x = b, r1y = lam - a;
+      const r2x = lam - d, r2y = c;
+      const n1 = Math.hypot(r1x, r1y);
+      const n2 = Math.hypot(r2x, r2y);
+      let vx = 1, vy = 0;
+      if (n1 >= n2 && n1 > 1e-8) {
+        vx = r1x; vy = r1y;
+      } else if (n2 > 1e-8) {
+        vx = r2x; vy = r2y;
+      }
+      if (vy < -1e-8 || (Math.abs(vy) <= 1e-8 && vx < 0)) {
+        vx = -vx; vy = -vy;
+      }
+      const m = Math.max(Math.abs(vx), Math.abs(vy)) || 1;
+      return [vx / m, vy / m];
+    }
+
+    // Mathematical Eigenvalues & Eigenvectors of 2x2
     function calculateEigen() {
       const a = A[0][0], b = A[0][1], c = A[1][0], d = A[1][1];
       const trace = a + d;
       const det = a * d - b * c;
       const disc = trace * trace - 4 * det;
 
-      let l1 = 0, l2 = 0;
-      let isReal = disc >= 0;
+      const pairs = [];
+      const isReal = disc >= -1e-9;
       if (isReal) {
-        l1 = (trace + Math.sqrt(disc)) / 2;
-        l2 = (trace - Math.sqrt(disc)) / 2;
+        const sdisc = Math.sqrt(Math.max(0, disc));
+        const l1 = (trace + sdisc) / 2;
+        const l2 = (trace - sdisc) / 2;
+
+        if (Math.abs(l1 - l2) < 1e-6 && Math.abs(b) < 1e-6 && Math.abs(c) < 1e-6) {
+          pairs.push({ lambda: l1, vx: 1, vy: 0 });
+          pairs.push({ lambda: l2, vx: 0, vy: 1 });
+        } else {
+          const [v1x, v1y] = solveEigenvector(a, b, c, d, l1);
+          pairs.push({ lambda: l1, vx: v1x, vy: v1y });
+          if (sdisc > 1e-6) {
+            const [v2x, v2y] = solveEigenvector(a, b, c, d, l2);
+            const cross = Math.abs(v1x * v2y - v1y * v2x);
+            if (cross > 1e-4) {
+              pairs.push({ lambda: l2, vx: v2x, vy: v2y });
+            }
+          }
+        }
       }
+      eigenState = { isReal, pairs };
 
       // Update Math HUD
       const charBox = document.getElementById('charEqBox');
@@ -465,12 +502,32 @@
 
       const c1 = document.getElementById('eigen1Card');
       const c2 = document.getElementById('eigen2Card');
-      if (isReal) {
-        c1.innerHTML = `<b>Eigenpair 1:</b> λ₁ = ${l1.toFixed(2)}<br><span style="color: #94A3B8; font-size: 11px;">Primary Stretch Axis (Cyan)</span>`;
-        c2.innerHTML = `<b>Eigenpair 2:</b> λ₂ = ${l2.toFixed(2)}<br><span style="color: #94A3B8; font-size: 11px;">Secondary Invariant Axis (Gold)</span>`;
+      const b1 = document.getElementById('snapBtn1');
+      const b2 = document.getElementById('snapBtn2');
+
+      if (isReal && pairs.length > 0) {
+        const p1 = pairs[0];
+        c1.innerHTML = `<b>Eigenpair 1:</b> λ₁ = ${p1.lambda.toFixed(2)}<br><span style="color: #94A3B8; font-size: 11px;">v₁ = [ ${p1.vx.toFixed(2)}, ${p1.vy.toFixed(2)} ]ᵀ (Cyan)</span>`;
+        b1.disabled = false;
+        b1.innerText = `Snap to v₁ [${p1.vx.toFixed(1)}, ${p1.vy.toFixed(1)}]ᵀ`;
+
+        if (pairs.length > 1) {
+          const p2 = pairs[1];
+          c2.innerHTML = `<b>Eigenpair 2:</b> λ₂ = ${p2.lambda.toFixed(2)}<br><span style="color: #94A3B8; font-size: 11px;">v₂ = [ ${p2.vx.toFixed(2)}, ${p2.vy.toFixed(2)} ]ᵀ (Gold)</span>`;
+          b2.disabled = false;
+          b2.innerText = `Snap to v₂ [${p2.vx.toFixed(1)}, ${p2.vy.toFixed(1)}]ᵀ`;
+        } else {
+          c2.innerHTML = `<b>Repeated Eigenvalue:</b> λ = ${p1.lambda.toFixed(2)}<br><span style="color: #94A3B8; font-size: 11px;">Defective matrix (single invariant span line)</span>`;
+          b2.disabled = true;
+          b2.innerText = `No 2nd Eigenvector`;
+        }
       } else {
-        c1.innerHTML = `<b>Complex Eigenvalues:</b> λ = ${(trace/2).toFixed(2)} ± ${(Math.sqrt(-disc)/2).toFixed(2)}i<br><span style="color: #94A3B8; font-size: 11px;">Rotational dynamics (No pure invariant line)</span>`;
+        c1.innerHTML = `<b>Complex Eigenvalues:</b> λ = ${(trace/2).toFixed(2)} ± ${(Math.sqrt(-disc)/2).toFixed(2)}i<br><span style="color: #94A3B8; font-size: 11px;">Rotational dynamics (No real invariant line)</span>`;
         c2.innerHTML = ``;
+        b1.disabled = true;
+        b2.disabled = true;
+        b1.innerText = `No Real v₁`;
+        b2.innerText = `No Real v₂`;
       }
     }
 
@@ -593,33 +650,31 @@
         ctx.stroke();
       }
 
-      // 3. Invariant Span Lines
-      if (showLines) {
+      // 3. Invariant Span Lines (Dynamic)
+      if (showLines && eigenState.isReal) {
+        const lineCols = ['rgba(0, 210, 211, 0.4)', 'rgba(255, 165, 2, 0.4)'];
         ctx.lineWidth = 2;
-        // Line y = x (Cyan)
-        ctx.strokeStyle = 'rgba(0, 210, 211, 0.4)';
-        ctx.beginPath();
-        ctx.moveTo(originX - 5 * scale, originY + 5 * scale);
-        ctx.lineTo(originX + 5 * scale, originY - 5 * scale);
-        ctx.stroke();
-
-        // Line y = -x (Gold)
-        ctx.strokeStyle = 'rgba(255, 165, 2, 0.4)';
-        ctx.beginPath();
-        ctx.moveTo(originX - 5 * scale, originY - 5 * scale);
-        ctx.lineTo(originX + 5 * scale, originY + 5 * scale);
-        ctx.stroke();
+        eigenState.pairs.forEach((p, idx) => {
+          const norm = Math.hypot(p.vx, p.vy) || 1;
+          const ux = (p.vx / norm) * 7;
+          const uy = (p.vy / norm) * 7;
+          ctx.strokeStyle = lineCols[idx % lineCols.length];
+          ctx.beginPath();
+          ctx.moveTo(originX - ux * scale, originY + uy * scale);
+          ctx.lineTo(originX + ux * scale, originY - uy * scale);
+          ctx.stroke();
+        });
       }
 
-      // 4. Eigenvectors
-      if (showEigVecs && tProgress > 0) {
-        // v1 = [1, 1] scaled by l1=3
-        const [tv1x, tv1y] = applyMatrix(M, 1, 1);
-        drawVector(0, 0, tv1x, tv1y, '#00D2D3', 4, 'v₁ [1, 1]ᵀ (λ₁=3)');
-
-        // v2 = [-1, 1] scaled by l2=1
-        const [tv2x, tv2y] = applyMatrix(M, -1, 1);
-        drawVector(0, 0, tv2x, tv2y, '#FFA502', 4, 'v₂ [-1, 1]ᵀ (λ₂=1)');
+      // 4. Eigenvectors (Dynamic)
+      if (showEigVecs && tProgress > 0 && eigenState.isReal) {
+        const vecCols = ['#00D2D3', '#FFA502'];
+        const subscripts = ['₁', '₂'];
+        eigenState.pairs.forEach((p, idx) => {
+          const [tvx, tvy] = applyMatrix(M, p.vx, p.vy);
+          const lbl = `v${subscripts[idx]} [${p.vx.toFixed(1)}, ${p.vy.toFixed(1)}]ᵀ (λ${subscripts[idx]}=${p.lambda.toFixed(1)})`;
+          drawVector(0, 0, tvx, tvy, vecCols[idx % vecCols.length], 4, lbl);
+        });
       }
 
       // 5. Test Vector x and Transformed Vector Ax
@@ -674,10 +729,12 @@
       draw();
     }
 
-    function snapVector(x, y) {
-      vecX = x;
-      vecY = y;
-      draw();
+    function snapToEigen(idx) {
+      if (eigenState.isReal && eigenState.pairs[idx]) {
+        vecX = eigenState.pairs[idx].vx;
+        vecY = eigenState.pairs[idx].vy;
+        draw();
+      }
     }
 
     function setMatrix(m00, m01, m10, m11) {
@@ -730,8 +787,8 @@
     }
 
     // Init
-    resize();
     calculateEigen();
+    resize();
   </script>
 </body>
 </html>
