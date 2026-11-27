@@ -132,16 +132,20 @@ def generate_srt(out_file="subtitles.srt"):
     durs = load_durations()
     scene_cues = build_scene_cues(durs)
     index = 1
+    prev_end = 0.0
     with open(out_file, "w") as f:
         for scene_name, base_offset, cues in scene_cues:
             for s_start, s_end, text in cues:
                 abs_start = base_offset + s_start
                 abs_end = base_offset + s_end
+                assert abs_start >= prev_end - 1e-6, f"Subtitle overlap in {scene_name}: {abs_start:.3f} < {prev_end:.3f}"
+                assert abs_end > abs_start, f"Invalid subtitle range in {scene_name}"
+                prev_end = abs_end
                 f.write(f"{index}\n")
                 f.write(f"{format_time(abs_start)} --> {format_time(abs_end)}\n")
                 f.write(f"{text}\n\n")
                 index += 1
-    print(f"Generated {index - 1} synced subtitle cues -> {out_file}")
+    print(f"Generated {index - 1} synced subtitle cues (0 overlaps) -> {out_file}")
 
 if __name__ == "__main__":
     generate_srt()

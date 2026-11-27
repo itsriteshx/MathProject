@@ -32,30 +32,44 @@ MUTED_GRAY = (148, 163, 184)
 GRID_LINE = (26, 34, 50)
 AXIS_COLOR = (74, 85, 104)
 
-# Font Paths
+# Font Paths & Safe Fallback Loader
 AVENIR_FONT = "/System/Library/Fonts/Avenir Next.ttc"
+HELVETICA_FALLBACK = "/System/Library/Fonts/Helvetica.ttc"
 STIX_MATH = "/System/Library/Fonts/Supplemental/STIXTwoMath.otf"
+ARIAL_UNICODE_FALLBACK = "/System/Library/Fonts/Supplemental/Arial Unicode.ttf"
 STIX_ITALIC = "/System/Library/Fonts/Supplemental/STIXTwoText-Italic.ttf"
 
+
+def load_font(paths, size, index=0):
+    """Loads the first available TrueType/OpenType font from fallback candidates."""
+    for path in paths:
+        if os.path.exists(path):
+            try:
+                return ImageFont.truetype(path, size, index=index)
+            except OSError:
+                return ImageFont.truetype(path, size)
+    return ImageFont.load_default()
+
+
 # Load System Typography Fonts
-FONT_HERO = ImageFont.truetype(AVENIR_FONT, 60, index=0)       # Bold
-FONT_TITLE = ImageFont.truetype(AVENIR_FONT, 38, index=0)      # Bold
-FONT_SUBTITLE = ImageFont.truetype(AVENIR_FONT, 25, index=2)   # Demi Bold
-FONT_BODY = ImageFont.truetype(AVENIR_FONT, 21, index=7)       # Regular
-FONT_BODY_SM = ImageFont.truetype(AVENIR_FONT, 18, index=5)    # Medium
-FONT_BADGE = ImageFont.truetype(AVENIR_FONT, 15, index=2)      # Demi Bold
-FONT_LABEL = ImageFont.truetype(AVENIR_FONT, 17, index=5)      # Medium
-FONT_ITALIC_SM = ImageFont.truetype(STIX_ITALIC, 24)
+FONT_HERO = load_font([AVENIR_FONT, HELVETICA_FALLBACK], 60, index=0)       # Bold
+FONT_TITLE = load_font([AVENIR_FONT, HELVETICA_FALLBACK], 38, index=0)      # Bold
+FONT_SUBTITLE = load_font([AVENIR_FONT, HELVETICA_FALLBACK], 25, index=2)   # Demi Bold
+FONT_BODY = load_font([AVENIR_FONT, HELVETICA_FALLBACK], 21, index=7)       # Regular
+FONT_BODY_SM = load_font([AVENIR_FONT, HELVETICA_FALLBACK], 18, index=5)    # Medium
+FONT_BADGE = load_font([AVENIR_FONT, HELVETICA_FALLBACK], 15, index=2)      # Demi Bold
+FONT_LABEL = load_font([AVENIR_FONT, HELVETICA_FALLBACK], 17, index=5)      # Medium
+FONT_ITALIC_SM = load_font([STIX_ITALIC, HELVETICA_FALLBACK], 24)
 
 # Academic Math Typography Fonts (STIXTwoMath)
-FONT_MATH_HERO = ImageFont.truetype(STIX_MATH, 72)
-FONT_MATH_TITLE = ImageFont.truetype(STIX_MATH, 38)
-FONT_MATH_LG = ImageFont.truetype(STIX_MATH, 42)
-FONT_MATH_MD = ImageFont.truetype(STIX_MATH, 29)
-FONT_MATH_MD_SUP = ImageFont.truetype(STIX_MATH, 18)
-FONT_MATH_SM = ImageFont.truetype(STIX_MATH, 21)
-FONT_MATH_BADGE = ImageFont.truetype(STIX_MATH, 16)
-FONT_MATH_SM_SUP = ImageFont.truetype(STIX_MATH, 14)
+FONT_MATH_HERO = load_font([STIX_MATH, ARIAL_UNICODE_FALLBACK], 72)
+FONT_MATH_TITLE = load_font([STIX_MATH, ARIAL_UNICODE_FALLBACK], 38)
+FONT_MATH_LG = load_font([STIX_MATH, ARIAL_UNICODE_FALLBACK], 42)
+FONT_MATH_MD = load_font([STIX_MATH, ARIAL_UNICODE_FALLBACK], 29)
+FONT_MATH_MD_SUP = load_font([STIX_MATH, ARIAL_UNICODE_FALLBACK], 18)
+FONT_MATH_SM = load_font([STIX_MATH, ARIAL_UNICODE_FALLBACK], 21)
+FONT_MATH_BADGE = load_font([STIX_MATH, ARIAL_UNICODE_FALLBACK], 16)
+FONT_MATH_SM_SUP = load_font([STIX_MATH, ARIAL_UNICODE_FALLBACK], 14)
 
 
 DEFAULT_DURATIONS = {
