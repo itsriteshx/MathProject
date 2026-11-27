@@ -229,9 +229,13 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    .btn:hover {
+    .btn:hover:not(:disabled) {
       background: #273554;
       border-color: var(--cyan);
+    }
+    .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
     }
     .btn-cyan {
       background: rgba(0, 210, 211, 0.15);
@@ -690,40 +694,63 @@
       document.getElementById('hudVector').innerText = `[ ${vecX.toFixed(2)}, ${vecY.toFixed(2)} ]ᵀ`;
       document.getElementById('hudTransformed').innerText = `[ ${tx.toFixed(2)}, ${ty.toFixed(2)} ]ᵀ`;
 
+      const len0 = Math.hypot(vecX, vecY);
+      const len1 = Math.hypot(tx, ty);
+      const badge = document.getElementById('statusBadge');
+
+      if (len0 < 0.05) {
+        document.getElementById('hudAngle').innerText = `Δθ = —`;
+        badge.className = 'status-pill status-rotating';
+        badge.innerText = `ZERO VECTOR (v ≠ 0 REQUIRED)`;
+        return;
+      }
+
       const angleX = Math.atan2(vecY, vecX) * (180 / Math.PI);
       const angleTx = Math.atan2(ty, tx) * (180 / Math.PI);
-      let dTheta = Math.abs(angleTx - angleX);
+      let dTheta = len1 < 1e-6 ? 0 : Math.abs(angleTx - angleX);
       if (dTheta > 180) dTheta = 360 - dTheta;
 
       document.getElementById('hudAngle').innerText = `Δθ = ${dTheta.toFixed(1)}°`;
 
-      const badge = document.getElementById('statusBadge');
-      if (dTheta < 1.0) {
-        const len0 = Math.hypot(vecX, vecY);
-        const len1 = Math.hypot(tx, ty);
-        const lambdaEst = (len1 / (len0 || 1)).toFixed(2);
+      const isAligned = len1 < 1e-6 || dTheta < 1.5 || Math.abs(dTheta - 180) < 1.5;
+      if (isAligned) {
+        const lambdaEst = ((vecX * tx + vecY * ty) / (len0 * len0)).toFixed(2);
         badge.className = 'status-pill status-eigen';
-        badge.innerText = `✨ EIGENVECTOR ALIGNED! (λ ≈ ${lambdaEst}, Δθ = 0°)`;
+        badge.innerText = `✨ EIGENVECTOR ALIGNED! (λ ≈ ${lambdaEst}, Δθ = ${dTheta.toFixed(0)}°)`;
       } else {
         badge.className = 'status-pill status-rotating';
         badge.innerText = `ROTATING (NOT EIGENVECTOR)`;
       }
     }
 
-    // Interaction Handlers
+    // Interaction Handlers (Mouse & Touch)
+    canvas.style.touchAction = 'none';
     canvas.addEventListener('mousedown', (e) => {
       isDragging = true;
-      setVectorFromMouse(e);
+      setVectorFromCoords(e.clientX, e.clientY);
     });
     window.addEventListener('mousemove', (e) => {
-      if (isDragging) setVectorFromMouse(e);
+      if (isDragging) setVectorFromCoords(e.clientX, e.clientY);
     });
     window.addEventListener('mouseup', () => { isDragging = false; });
 
-    function setVectorFromMouse(e) {
+    canvas.addEventListener('touchstart', (e) => {
+      if (e.touches.length > 0) {
+        isDragging = true;
+        setVectorFromCoords(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: true });
+    canvas.addEventListener('touchmove', (e) => {
+      if (isDragging && e.touches.length > 0) {
+        setVectorFromCoords(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: true });
+    canvas.addEventListener('touchend', () => { isDragging = false; });
+
+    function setVectorFromCoords(clientX, clientY) {
       const rect = canvas.getBoundingClientRect();
-      const mx = e.clientX - rect.left;
-      const my = e.clientY - rect.top;
+      const mx = clientX - rect.left;
+      const my = clientY - rect.top;
       vecX = (mx - originX) / scale;
       vecY = -(my - originY) / scale;
       draw();
