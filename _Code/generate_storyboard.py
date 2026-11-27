@@ -98,9 +98,9 @@ def generate_storyboard_pdf():
             Paragraph("<b>Assessment Weightage:</b> 10% Internal", body_style)
         ],
         [
-            Paragraph("<b>Duration:</b> Exactly 6.00 Minutes (Guidelines Compliant)", body_style),
+            Paragraph("<b>Duration:</b> 5 Minutes 34 Seconds (Guidelines Compliant)", body_style),
             Paragraph("<b>Format:</b> 1080p 16:9 Landscape MP4 + Subtitles", body_style),
-            Paragraph("<b>Narration:</b> Tony Stark AI Stylized Delivery", body_style)
+            Paragraph("<b>Narration:</b> Ritesh Kumar (Original Hinglish Voice)", body_style)
         ]
     ]
     meta_table = Table(meta_data, colWidths=[180, 200, 168])
@@ -117,7 +117,7 @@ def generate_storyboard_pdf():
     obj_text = (
         "<b>Core Learning Objective:</b> <i>\"By the end of this video, the viewer will be able to geometrically understand "
         "why eigenvectors represent invariant transformation axes (and principal axes of ellipse deformation), calculate eigenvalues "
-        "and eigenvectors step-by-step for a 2 × 2 matrix, and explain how diagonalization (A = P D P⁻¹) converts complex linear systems "
+        "and eigenvectors step-by-step for a 2 × 2 matrix, and explain how diagonalization (A = P D P<sup>-1</sup>) converts complex linear systems "
         "into independent scalar scaling.\"</i>"
     )
     obj_table = Table([[Paragraph(obj_text, body_style)]], colWidths=[548])
@@ -134,16 +134,16 @@ def generate_storyboard_pdf():
     
     scenes_info = [
         (
-            1, "Scene 1: Hook / Context (~40 sec)",
+            1, "Scene 1: Hook / Context (~39 sec)",
             "assets/snapshots/scene1.png",
             "Spark curiosity & motivate topic with real-world applications.",
-            "• Official Opening Frame displaying Student Credentials (Ritesh Kumar, e25b070681).<br/>"
+            "• Minimalist 3Blue1Brown-style Title Card showcasing Av = λv, live geometric eigen-field preview, and attribution (Presented by Ritesh Kumar).<br/>"
             "• Dynamic visualization of matrix transformation chaos (vectors tumbling in all directions).<br/>"
             "• 3 Application Cards: Structural Resonance (Tacoma Narrows bridge collapse prevention), Google PageRank, and PCA.<br/>"
             "• Guiding Question: 'In a storm of distortion, which directions stay invariant?'"
         ),
         (
-            2, "Scene 2: Concept Introduction (~45 sec)",
+            2, "Scene 2: Concept Introduction (~50 sec)",
             "assets/snapshots/scene2.png",
             "Define the concept, formal notation, and core learning goals.",
             "• Centered Golden Equation: Av = λv (v ≠ 0).<br/>"
@@ -156,35 +156,35 @@ def generate_storyboard_pdf():
             "assets/snapshots/scene3.png",
             "Demonstrate geometric invariant lines and 3Blue1Brown circle-to-ellipse morphing.",
             "• 2D grid deformation under matrix A = [[2, 1], [1, 2]].<br/>"
-            "• 3Blue1Brown Unit Circle to Ellipse morphing: circle stretches into an ellipse whose semi-major axis is v₁ (length λ₁=3) and semi-minor axis is v₂ (length λ₂=1).<br/>"
-            "• Generic vector u = [1, 0]^T tilts by 26.6° to [2, 1]^T (not an eigenvector).<br/>"
-            "• Invariant Line y = x (Cyan, v₁=[1, 1]^T) stretches 3× with 0° rotation.<br/>"
-            "• Invariant Line y = -x (Gold, v₂=[-1, 1]^T) preserved with λ₂=1. Orthogonality highlight."
+            "• 3Blue1Brown Unit Circle to Ellipse morphing: circle stretches into an ellipse whose semi-major axis is v<sub>1</sub> (length λ<sub>1</sub>=3) and semi-minor axis is v<sub>2</sub> (length λ<sub>2</sub>=1).<br/>"
+            "• Generic vector u = [1, 0]<sup>T</sup> tilts by 26.6° to [2, 1]<sup>T</sup> (not an eigenvector).<br/>"
+            "• Invariant Line y = x (Cyan, v<sub>1</sub>=[1, 1]<sup>T</sup>) stretches 3× with 0° rotation.<br/>"
+            "• Invariant Line y = -x (Gold, v<sub>2</sub>=[-1, 1]<sup>T</sup>) preserved with λ<sub>2</sub>=1. Orthogonality highlight."
         ),
         (
-            4, "Scene 4: Worked Example Step-by-Step (~101 sec)",
+            4, "Scene 4: Worked Example Step-by-Step (~74 sec)",
             "assets/snapshots/scene4.png",
             "Demonstrate rigorous algebraic derivation step-by-step.",
             "• Step 1: Nullspace condition (A - λI)v = 0. Explain why det(A - λI) = 0 is required for non-trivial solutions.<br/>"
-            "• Step 2: Characteristic polynomial det[[2-λ, 1], [1, 2-λ]] = (2-λ)² - 1 = λ² - 4λ + 3 = 0.<br/>"
-            "• Step 3: Factoring gives λ₁ = 3 and λ₂ = 1.<br/>"
-            "• Step 4: Solving eigenspaces: E₃ = span{[1, 1]^T} and E₁ = span{[-1, 1]^T}."
+            "• Step 2: Characteristic polynomial det[[2-λ, 1], [1, 2-λ]] = (2-λ)<sup>2</sup> - 1 = λ<sup>2</sup> - 4λ + 3 = 0.<br/>"
+            "• Step 3: Factoring gives λ<sub>1</sub> = 3 and λ<sub>2</sub> = 1.<br/>"
+            "• Step 4: Solving eigenspaces: E<sub>3</sub> = span{[1, 1]<sup>T</sup>} and E<sub>1</sub> = span{[-1, 1]<sup>T</sup>}."
         ),
         (
-            5, "Scene 5: Interpretation & Eigenbasis (~58 sec)",
+            5, "Scene 5: Interpretation & Eigenbasis (~62 sec)",
             "assets/snapshots/scene5.png",
             "Connect algebra to real-world power: Diagonalization & matrix powers.",
-            "• Change of basis to eigenbasis: A = P D P⁻¹, where D = diag(3, 1).<br/>"
-            "• Computing matrix powers: A¹⁰⁰ = P D¹⁰⁰ P⁻¹.<br/>"
-            "• Visual comparison: 100 consecutive matrix multiplications vs. instant scalar powers (3¹⁰⁰ and 1¹⁰⁰).<br/>"
+            "• Change of basis to eigenbasis: A = P D P<sup>-1</sup>, where D = diag(3, 1).<br/>"
+            "• Computing matrix powers: A<sup>100</sup> = P D<sup>100</sup> P<sup>-1</sup>.<br/>"
+            "• Visual comparison: 100 consecutive matrix multiplications vs. instant scalar powers (3<sup>100</sup> and 1<sup>100</sup>).<br/>"
             "• Decoupling coupled multivariable dynamic systems and Markov chains."
         ),
         (
-            6, "Scene 6: Summary & Closing Credits (~36 sec)",
+            6, "Scene 6: Summary & Closing Credits (~28 sec)",
             "assets/snapshots/scene6.png",
             "Reinforce 3 core takeaways, display credits, and official closing frame.",
             "• 3 Core Takeaways: Geometric Invariance, Algebraic Singularity, and Decoupling Dynamics.<br/>"
-            "• Official Closing Frame with student credentials, tools, AI disclosure, and interactive simulator notice."
+            "• Closing Credits Frame with student credentials (Ritesh Kumar, e25b070681), tools, AI disclosure, and interactive simulator notice."
         )
     ]
     
@@ -225,7 +225,7 @@ def generate_storyboard_pdf():
     # Footer Notes
     elements.append(Paragraph("<b>Rubric & Deliverables Alignment Summary:</b>", body_style))
     elements.append(Paragraph(
-        "• <b>Video & Audio:</b> 1080p Full HD MP4, exactly 6.00 minutes, Tony Stark AI stylized voiceover narration, embedded English subtitles.<br/>"
+        "• <b>Video & Audio:</b> 1080p Full HD MP4, 5 min 34 sec, original Hinglish voiceover narration by Ritesh Kumar, embedded synced subtitles.<br/>"
         "• <b>Original Effort:</b> Custom Python rendering pipeline (NumPy, SciPy, Pillow, FFmpeg) + Interactive HTML5 Canvas Simulator (index.html).<br/>"
         "• <b>Mathematical Rigor:</b> Geometric circle-to-ellipse transformation, algebraic nullspace proof, characteristic equation, and diagonalization.",
         body_style

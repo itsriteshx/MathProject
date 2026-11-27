@@ -1,224 +1,184 @@
 1
-00:00:00,500 --> 00:00:07,000
-Welcome. In linear algebra, when a matrix acts on space, it usually distorts, rotates,
+00:00:00,188 --> 00:00:06,376
+Hello, my name is Ritesh. Aaj hum baat karenge Linear Algebra ke ek bahut interesting topic:
 
 2
-00:00:07,500 --> 00:00:13,000
-and scrambles everything in its path. Vectors tumble in all directions.
+00:00:06,657 --> 00:00:11,815
+Eigenvalues and Eigenvectors ke bare mein. Jab bhi koi matrix space par apply hota hai,
 
 3
-00:00:13,500 --> 00:00:18,000
-But hidden inside almost every linear transformation lies a profound secret:
+00:00:12,377 --> 00:00:16,784
+toh wo sab kuch rotate aur stretch kar deta hai. Saare vectors apni direction kho dete hain.
 
 4
-00:00:18,500 --> 00:00:24,000
-a special set of axes that stubbornly refuse to rotate.
+00:00:16,878 --> 00:00:22,785
+Lekin beech mein kuch special axes hote hain jo bilkul nahi ghumte; direction same rehti hai.
 
 5
-00:00:24,500 --> 00:00:30,500
-These invariant directions are the eigenvectors, and their scaling factors are the eigenvalues.
+00:00:23,160 --> 00:00:28,411
+Inhi invariant directions ko Eigenvectors kehte hain, aur scaling factor ko Eigenvalue.
 
 6
-00:00:31,000 --> 00:00:36,000
-From preventing bridges from tearing themselves apart during resonant wind storms,
+00:00:29,068 --> 00:00:34,319
+Bridges ko resonance se bachana ho, Google PageRank ho, ya data compression —
 
 7
-00:00:36,500 --> 00:00:39,500
-to powering Google's PageRank and big data: finding these directions is peak mathematics.
+00:00:34,412 --> 00:00:38,819
+har jagah Eigenvectors aur Eigenvalues ka concept apply hota hai.
 
 8
-00:00:40,480 --> 00:00:44,480
-Let us define the core concept precisely.
+00:00:39,282 --> 00:00:43,582
+Ab hum log iski exact definition ko dekhte hain.
 
 9
-00:00:44,980 --> 00:00:50,480
-Normally, an n by n matrix A multiplies a vector x into a completely new direction.
+00:00:43,682 --> 00:00:50,582
+Normally ek n x n matrix A kisi vector x se multiply hota hai, toh naya vector Ax banta hai.
 
 10
-00:00:50,980 --> 00:00:54,480
-Both its length and its angle change.
+00:00:51,282 --> 00:00:55,582
+Uske angle aur length dono change ho jaate hain, jaisa left box mein dikh raha hai.
 
 11
-00:00:54,980 --> 00:01:00,480
-However, if a vector v satisfies the golden equation, A v equals lambda v, magic happens.
+00:00:55,682 --> 00:01:02,582
+Lekin agar koi non-zero vector v golden equation Av = lambda v satisfy kare, toh magic hota hai:
 
 12
-00:01:00,980 --> 00:01:06,480
-Matrix multiplication collapses into simple scalar multiplication by a single number, lambda.
+00:01:02,682 --> 00:01:07,682
+Matrix multiplication simplify ho kar ek simple scalar scaling ban jaati hai.
 
 13
-00:01:06,980 --> 00:01:12,480
-The non-zero vector v is an eigenvector, and scalar lambda is its eigenvalue.
+00:01:08,082 --> 00:01:13,082
+Yahan non-zero vector v hamara Eigenvector hai, aur number lambda ek Eigenvalue.
 
 14
-00:01:12,980 --> 00:01:19,480
-Along this line in space, the matrix acts not like a matrix, but like a simple number.
+00:01:13,582 --> 00:01:20,582
+Matlab is special line par matrix sirf ek multiplier ki tarah kaam karta hai.
 
 15
-00:01:19,980 --> 00:01:23,980
-Pure stretching, shrinking, or reversal along a single invariant line.
+00:01:21,082 --> 00:01:28,182
+Lambda > 1 ho toh stretch, 0 aur 1 ke beech shrink, aur negative ho toh direction reverse!
 
 16
-00:01:25,000 --> 00:01:29,500
-To truly grasp this concept, let us watch geometry in action.
+00:01:28,823 --> 00:01:32,453
+Ab iski geometry aur animation ke through samajhte hain.
 
 17
-00:01:30,000 --> 00:01:36,000
-Consider the symmetric transformation matrix A with rows: two, one, and one, two.
+00:01:32,645 --> 00:01:39,332
+Maan lete hain hamare paas 2 x 2 matrix A hai: first row [2, 1] aur second row [1, 2].
 
 18
-00:01:36,500 --> 00:01:42,000
-Notice what happens to a generic vector, like one-zero on the horizontal x-axis.
+00:01:39,619 --> 00:01:43,918
+Pehle left graph mein red vector u = [1, 0] ko dekhte hain.
 
 19
-00:01:42,500 --> 00:01:48,500
-As the matrix warps the grid, this vector visibly tilts upwards to two-one, rotating off span.
+00:01:44,109 --> 00:01:52,325
+Matrix apply hote hi ye [2, 1] par aa jaata hai (~26 degrees tilt). Matlab ye eigenvector nahi hai.
 
 20
-00:01:49,000 --> 00:01:55,000
-It was knocked off course by more than twenty-six degrees.
+00:01:52,707 --> 00:01:56,624
+Ab dhyan se dekho jaise unit circle stretch ho kar ek ellipse ban raha hai!
 
 21
-00:01:55,500 --> 00:02:01,000
-Now, watch the unit circle stretch into an ellipse under the transformation.
+00:01:56,911 --> 00:02:02,548
+Ab diagonal line y = x par agar hum vector v1 = [1, 1] lete hain,
 
 22
-00:02:01,500 --> 00:02:07,500
-Observe the diagonal line y equals x. If we place vector v1 = [1, 1] on this line,
+00:02:02,834 --> 00:02:13,725
+toh ye bina rotate hue bilkul isi line ke along 3 times stretch ho kar [3, 3] par pahunch jaata hai.
 
 23
-00:02:08,000 --> 00:02:14,000
-it does not rotate by even a fraction of a degree!
+00:02:14,967 --> 00:02:22,992
+Ye ellipse ki major axis hai, aur pehli eigenvalue lambda1 = 3.
 
 24
-00:02:14,500 --> 00:02:21,000
-It simply stretches by a factor of 3 along the major axis of the ellipse to [3, 3]. Lambda 1 is 3.
+00:02:23,852 --> 00:02:31,018
+Ab yellow colour ki perpendicular line y = -x par vector v2 = [-1, 1] bilkul change nahi hua.
 
 25
-00:02:21,500 --> 00:02:28,000
-Next, look at the perpendicular diagonal line y equals negative x.
+00:02:31,400 --> 00:02:40,380
+Na length badli na angle (1x minor axis), toh doosri eigenvalue lambda2 = 1 hai.
 
 26
-00:02:28,500 --> 00:02:35,500
-Vector v2 = [-1, 1] remains completely unchanged in both length and direction!
+00:02:40,953 --> 00:02:48,405
+Notice karo ye dono eigenvectors 90 degrees par hain, aur yahi space ka natural skeleton banate hain.
 
 27
-00:02:36,000 --> 00:02:41,000
-Its scaling factor is exactly lambda 2 equals 1, matching the minor axis of the ellipse.
+00:02:48,900 --> 00:02:56,379
+Par exam ya coding mein bina graph banaye math se values kaise nikalenge? Step-by-step dekhte hain.
 
 28
-00:02:41,500 --> 00:02:44,500
-These two perpendicular invariant lines form the natural geometric skeleton of space.
+00:02:56,947 --> 00:03:02,438
+First step: Av = lambda v se start karenge. Rearrange karne par (A - lambda I)v = 0 milta hai.
 
 29
-00:02:45,400 --> 00:02:49,900
-How do we find these special values without guessing?
+00:03:03,196 --> 00:03:13,799
+Kyunki v zero nahi ho sakta, determinant det(A - lambda I) = 0 hona chahiye (Characteristic Equation).
 
 30
-00:02:50,400 --> 00:02:55,900
-Let us walk step by step through the rigorous algebraic derivation.
+00:03:14,556 --> 00:03:21,846
+Ab determinant solve karke characteristic equation se lambda ki values nikalte hain.
 
 31
-00:02:56,400 --> 00:03:02,400
-We begin with A v equals lambda v. Subtracting yields: (A - lambda I) v = 0.
+00:03:22,224 --> 00:03:30,366
+Jaisa aap dekh sakte ho, expand karne par (2 - lambda)^2 - 1 = 0 milta hai,
 
 32
-00:03:02,900 --> 00:03:09,400
-For a non-zero eigenvector v to exist, this system must have non-trivial solutions.
+00:03:30,934 --> 00:03:39,265
+jo quadratic equation lambda^2 - 4*lambda + 3 = 0 ban jaati hai.
 
 33
-00:03:09,900 --> 00:03:16,400
-Geometrically, (A - lambda I) must collapse space into a line or point,
+00:03:39,644 --> 00:03:48,921
+Iske factors (lambda - 3)(lambda - 1) = 0 se lambda1 = 3 aur lambda2 = 1 milta hai.
 
 34
-00:03:16,900 --> 00:03:22,400
-which is possible if and only if its determinant is strictly zero.
+00:03:49,773 --> 00:03:59,809
+Ab eigenvectors ke liye in values ko wapas (A - lambda I)v = 0 equation mein fill karte hain,
 
 35
-00:03:22,900 --> 00:03:29,900
-Setting determinant of [2 - lambda, 1; 1, 2 - lambda] to zero gives the characteristic equation:
+00:04:00,471 --> 00:04:02,933
+aur hume dono orthogonal eigenvectors v1 = [1, 1] aur v2 = [-1, 1] mil jaate hain.
 
 36
-00:03:30,400 --> 00:03:36,900
-(2 - lambda) squared minus 1 equals zero, simplifying to lambda squared minus 4 lambda plus 3 equals 0.
+00:04:03,315 --> 00:04:07,572
+Ab aate hain last mein Diagonalization: A = P D P^-1 par.
 
 37
-00:03:37,400 --> 00:03:43,900
-Factoring gives (lambda - 3)(lambda - 1) = 0, revealing lambda 1 = 3, and lambda 2 = 1.
+00:04:07,959 --> 00:04:13,376
+Normal x, y axes mein matrix A variables ko aapas mein mix kar deta hai, jisse calculation mushkil hoti hai.
 
 38
-00:03:44,400 --> 00:03:51,900
-Now we find eigenspaces by substituting back into (A - lambda I) v = 0.
+00:04:13,859 --> 00:04:22,856
+Lekin coordinate system v1, v2 par shift karne se A ek simple diagonal matrix D = diag(3, 1) ban jaata hai.
 
 39
-00:03:52,400 --> 00:03:59,900
-For lambda = 3: the system simplifies to -x + y = 0, giving eigenvector v1 = [1, 1].
+00:04:23,436 --> 00:04:33,013
+Practical use: Maan lo kisi bridge vibration ya Markov chain ke liye A^100 nikalna hai.
 
 40
-00:04:00,400 --> 00:04:08,400
-For lambda = 1: the system simplifies to x + y = 0, giving eigenvector v2 = [-1, 1].
+00:04:33,496 --> 00:04:46,652
+Left box dekho: normal tarike se A ko 100 baar multiply karne mein bahut time, memory aur rounding errors aate hain.
 
 41
-00:04:08,900 --> 00:04:17,400
-Because matrix A is symmetric, v1 and v2 are guaranteed to be mutually orthogonal!
+00:04:47,039 --> 00:04:54,778
+Lekin right box: eigenbasis mein A^100 nikalna sirf 1 second ka kaam hai!
 
 42
-00:04:17,900 --> 00:04:24,900
-The algebra confirms our geometric observation with flawless precision.
+00:04:55,648 --> 00:05:05,322
+Bas 3^100 along v1 aur 1^100 along v2 — complex problem bilkul simple scalar calculation ban jaati hai!
 
 43
-00:04:26,100 --> 00:04:31,100
-Now comes the ultimate payoff: Diagonalization and change of basis.
+00:05:05,770 --> 00:05:15,663
+End mein bas 3 points yaad rakhna: Pehla, Eigenvectors jo transformation ke baad rotate nahi hote, sirf scale hote hain.
 
 44
-00:04:31,600 --> 00:04:38,100
-In our standard x-y system, matrix A couples x and y, making repeated calculations messy.
+00:05:16,223 --> 00:05:20,983
+Doosra, Eigenvalues jo hum det(A - lambda I) = 0 solve karke nikalte hain.
 
 45
-00:04:38,600 --> 00:04:45,600
-However, in the eigenbasis of v1 and v2, matrix A becomes completely diagonal: D = diag(3, 1).
+00:05:21,263 --> 00:05:26,209
+Teesra, Diagonalization jo complex matrix systems ko bilkul aasaan bana deta hai.
 
 46
-00:04:46,100 --> 00:04:52,100
-Why does this matter in real-world science and engineering?
-
-47
-00:04:52,600 --> 00:04:59,600
-Imagine calculating A raised to the 100th power, such as modeling dynamic vibrations over time.
-
-48
-00:05:00,100 --> 00:05:07,100
-Multiplying matrix A 100 times directly requires massive computation and accumulates error.
-
-49
-00:05:07,600 --> 00:05:15,100
-In the eigenbasis, A^100 is simply 3^100 along v1, and 1^100 along v2!
-
-50
-00:05:15,600 --> 00:05:23,100
-Eigenvalues decouple complex coupled systems into independent, easily solvable dimensions.
-
-51
-00:05:24,250 --> 00:05:27,750
-To summarize, let us recap three core takeaways:
-
-52
-00:05:28,250 --> 00:05:34,250
-First: Eigenvectors are invariant directions that undergo pure scaling without rotation.
-
-53
-00:05:34,750 --> 00:05:41,250
-Second: We find eigenvalues algebraically by setting determinant of (A - lambda I) to zero.
-
-54
-00:05:41,750 --> 00:05:48,250
-And third: Aligning with the eigenbasis decouples complex systems into simple scalar scaling.
-
-55
-00:05:48,750 --> 00:05:53,750
-Thank you for watching this presentation.
-
-56
-00:05:54,250 --> 00:05:59,750
-Developed and coded by Ritesh Kumar for the M3 Linear Algebra and Calculus internal assessment.
+00:05:26,676 --> 00:05:33,582
+Thank you so much! Ye animation video aur poora Python code maine (Ritesh Kumar) banaya.
 

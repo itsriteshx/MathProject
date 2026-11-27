@@ -65,6 +65,7 @@ def generate_ambient_track():
     # Normalize and scale to subtle background level
     audio = audio / np.max(np.abs(audio)) * 0.12
     
+    os.makedirs("assets/audio", exist_ok=True)
     wav_path = "assets/audio/background_pad.wav"
     wavfile.write(wav_path, SAMPLE_RATE, (audio * 32767).astype(np.int16))
     

@@ -5,8 +5,11 @@ __pycache__/
 .DS_Store
 assets/rendered_scenes/
 assets/test_frames/
+assets/audio/ritesh_raw_recording.*
+assets/audio/ritesh_part2_raw.*
+assets/audio/new_voice_ryan_full.mp3
+RECORDING_SCRIPT.md
 /tmp/
 
-# Protected Local Deliverables (Excluded from public GitHub until final submission day)
-_Video.mp4
+# Protected Local Notes (Excluded from public GitHub)
 VIVA_PREP_GUIDE.md

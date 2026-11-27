@@ -5,4 +5,3 @@ scipy>=1.14.0
 matplotlib>=3.9.0
 pillow>=10.4.0
 reportlab>=4.2.0
-edge-tts>=6.1.0

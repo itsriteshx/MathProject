@@ -2,9 +2,9 @@
 ## Project Option 1: Mathematical Animation Video (10% Weightage)
 
 ![Resolution](https://img.shields.io/badge/Resolution-1080p_16%3A9-blue.svg)
-![Duration](https://img.shields.io/badge/Duration-6m_00s-green.svg)
+![Duration](https://img.shields.io/badge/Duration-5m_34s-green.svg)
 ![Topic](https://img.shields.io/badge/Topic-Eigenvalues_%26_Eigenvectors-purple.svg)
-![Voice](https://img.shields.io/badge/Voice-Tony_Stark_AI-red.svg)
+![Voice](https://img.shields.io/badge/Voice-Original_Hinglish_Narration-red.svg)
 ![Subtitles](https://img.shields.io/badge/Subtitles-Embedded_CC-orange.svg)
 ![Interactive](https://img.shields.io/badge/Simulator-HTML5_Canvas-brightgreen.svg)
 ![Status](https://img.shields.io/badge/Status-Completed-success.svg)
@@ -17,7 +17,7 @@
 * **Course:** Linear Algebra and Calculus (M3)
 * **Topic:** **Eigenvalues and Eigenvectors: The Invariant Directions of Linear Space**
 * **Repository Name:** `M3_AnimationVideo_Eigenvalues_e25b070681`
-* **Final Rendered Video:** `_Video.mp4` (Duration: Exactly 06:00, 1080p Full HD, Embedded Subtitles, Tony Stark AI Delivery) *(Generated and verified locally via Python pipeline; committed on deadline)*
+* **Final Rendered Video:** `_Video.mp4` (Duration: 5m 34s, 1080p Full HD, Embedded Subtitles, Original Hinglish Voiceover by Ritesh Kumar) *(Generated and verified locally via Python pipeline)*
 * **Official Visual Storyboard:** [`Storyboard.pdf`](./Storyboard.pdf) (With High-Res Scene Snapshots)
 * **Interactive Simulator:** [`index.html`](./index.html) (Live Web Simulator, GitHub Pages Ready)
 * **Closed Captions File:** [`subtitles.srt`](./subtitles.srt)
@@ -43,12 +43,12 @@ To provide full original interactive value, this repository includes a standalon
 
 | Scene | Duration | Purpose | Key Visual & Mathematical Content |
 | :--- | :--- | :--- | :--- |
-| **1. Hook / Context** | `00:40` | Motivate the concept through real-world systems | • **Official Opening Frame** with Student details (Ritesh Kumar, `e25b070681`).<br/>• Dynamic animation showing chaotic vector transformation.<br/>• 3 Application Cards: **Structural Resonance** (Tacoma Narrows bridge collapse prevention), **Google PageRank**, and **Principal Component Analysis (PCA)**. |
-| **2. Concept Intro** | `00:45` | Define the formal equation and notation | • The Golden Equation: $A\vec{v} = \lambda \vec{v}, \quad (\vec{v} \neq \vec{0})$.<br/>• Split comparison: Generic vector $\vec{x}$ (tilts off span) vs. Eigenvector $\vec{v}$ (preserves direction, pure scalar scaling). |
+| **1. Hook / Context** | `00:39` | Motivate the concept through real-world systems | • **Premium Minimalist Title Card** showcasing $A\vec{v} = \lambda\vec{v}$, live geometric eigen-field preview, and attribution (`Presented by Ritesh Kumar`).<br/>• Dynamic animation showing chaotic vector transformation.<br/>• 3 Application Cards: **Structural Resonance** (Tacoma Narrows bridge collapse prevention), **Google PageRank**, and **Principal Component Analysis (PCA)**. |
+| **2. Concept Intro** | `00:50` | Define the formal equation and notation | • The Golden Equation: $A\vec{v} = \lambda \vec{v}, \quad (\vec{v} \neq \vec{0})$.<br/>• Split comparison: Generic vector $\vec{x}$ (tilts off span) vs. Eigenvector $\vec{v}$ (preserves direction, pure scalar scaling). |
 | **3. Visual Intuition & Ellipse** | `01:20` | Demonstrate geometric invariant lines & 3Blue1Brown ellipse | • Transformation Matrix: $A = \begin{pmatrix} 2 & 1 \\ 1 & 2 \end{pmatrix}$.<br/>• **3Blue1Brown Unit Circle to Ellipse Morphing:** Unit circle deforms into an ellipse whose semi-major axis is $\vec{v}_1$ (length $\lambda_1 = 3$) and semi-minor axis is $\vec{v}_2$ (length $\lambda_2 = 1$).<br/>• **Generic vector** $\vec{u} = [1, 0]^T \to [2, 1]^T$ rotates by $26.6^\circ$.<br/>• **Eigenvector 1:** Line $y = x$ ($\vec{v}_1 = [1, 1]^T$) stretches $3\times$ with $0^\circ$ rotation ($\lambda_1 = 3$).<br/>• **Eigenvector 2:** Line $y = -x$ ($\vec{v}_2 = [-1, 1]^T$) is completely invariant ($\lambda_2 = 1$). |
-| **4. Worked Example** | `01:41` | Step-by-step algebraic derivation | • Nullspace condition: $(A - \lambda I)\vec{v} = \vec{0}$.<br/>• Why $\det(A - \lambda I) = 0$ is necessary for non-trivial solutions.<br/>• Characteristic polynomial: $\lambda^2 - 4\lambda + 3 = 0 \implies \lambda_1 = 3, \lambda_2 = 1$.<br/>• Solving eigenspaces: $E_{\lambda=3} = \text{span}\{[1, 1]^T\}$, $E_{\lambda=1} = \text{span}\{[-1, 1]^T\}$. |
-| **5. Interpretation** | `00:58` | Diagonalization & computational power | • Change of basis to the eigenbasis: $A = P D P^{-1}$.<br/>• Computing matrix powers: $A^{100} = P D^{100} P^{-1} = P \begin{pmatrix} 3^{100} & 0 \\ 0 & 1^{100} \end{pmatrix} P^{-1}$.<br/>• Decoupling complex differential equations and Markov chains. |
-| **6. Summary & Credits**| `00:36` | Synthesize key ideas & official closing frame | • 3 Core Takeaways: Geometric Invariance, Algebraic Singularity, and Decoupling Power.<br/>• **Official Closing Frame** with student credentials, tools, AI disclosure, and citations. |
+| **4. Worked Example** | `01:14` | Step-by-step algebraic derivation | • Nullspace condition: $(A - \lambda I)\vec{v} = \vec{0}$.<br/>• Why $\det(A - \lambda I) = 0$ is necessary for non-trivial solutions.<br/>• Characteristic polynomial: $\lambda^2 - 4\lambda + 3 = 0 \implies \lambda_1 = 3, \lambda_2 = 1$.<br/>• Solving eigenspaces: $E_{\lambda=3} = \text{span}\{[1, 1]^T\}$, $E_{\lambda=1} = \text{span}\{[-1, 1]^T\}$. |
+| **5. Interpretation** | `01:02` | Diagonalization & computational power | • Change of basis to the eigenbasis: $A = P D P^{-1}$.<br/>• Computing matrix powers: $A^{100} = P D^{100} P^{-1} = P \begin{pmatrix} 3^{100} & 0 \\ 0 & 1^{100} \end{pmatrix} P^{-1}$.<br/>• Decoupling complex differential equations and Markov chains. |
+| **6. Summary & Credits**| `00:28` | Synthesize key ideas & official closing frame | • 3 Core Takeaways: Geometric Invariance, Algebraic Singularity, and Decoupling Power.<br/>• **Closing Credits Frame** with author details (Ritesh Kumar, `e25b070681`), tools, AI disclosure, and citations. |
 
 ---
 
@@ -96,19 +96,16 @@ source .venv/bin/activate
 # 2. Install required packages
 pip install -r _Code/requirements.txt
 
-# 3. Generate Tony Stark narration audio
-python3 _Code/generate_audio.py
+# 3. (Optional) Generate ambient background music or place narration clips in assets/audio/
+# python3 _Code/generate_music.py
 
 # 4. Generate synchronized subtitles (SRT)
 python3 _Code/generate_subtitles.py
 
-# 5. Synthesize ambient background music pad
-python3 _Code/generate_music.py
-
-# 6. Render 1080p video scenes and assemble final video with subtitles
+# 5. Render 1080p video scenes and assemble final video with subtitles
 python3 _Code/render_video.py
 
-# 7. Generate official visual storyboard PDF with snapshots
+# 6. Generate official visual storyboard PDF with snapshots
 python3 _Code/generate_storyboard.py
 ```
 
@@ -116,8 +113,8 @@ python3 _Code/generate_storyboard.py
 
 ## 📜 Originality & AI Tools Disclosure
 * **Animation Engine:** Custom Python 3 script utilizing `Pillow`, `NumPy`, `SciPy`, and `FFmpeg` for direct 1080p raw-frame piping.
-* **Voice-Over Narration:** Generated using Microsoft Edge Neural TTS (`en-US-GuyNeural`) with stylized Tony Stark (Robert Downey Jr.) delivery.
-* **Closed Captions:** Synchronized `.srt` English subtitles embedded directly into `_Video.mp4` as a switchable subtitle track.
+* **Voice-Over Narration:** Original Hinglish student voice recording by Ritesh Kumar (noise-filtered, loudness-normalized, and frame-synced across all 6 scenes).
+* **Closed Captions:** Synchronized `.srt` Hinglish subtitles embedded directly into `_Video.mp4` as a switchable subtitle track.
 * **Background Music:** Programmatically synthesized 432 Hz ambient harmonic pad in A-minor / D-minor with soft low-pass filtering.
 * **Interactive Tool:** Custom HTML5 Canvas web simulator (`index.html`) allowing interactive real-time vector dragging and eigen-detection.
 * **AI Disclosure:** Script writing assistance, visual timing calibration, and code structure assisted by Google Antigravity. Mathematical proofs, verification, and code execution conducted independently.
